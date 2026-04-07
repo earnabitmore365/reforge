@@ -1,0 +1,9 @@
+{
+  "name": "reforge",
+  "version": "1.0.0",
+  "description": "Reforge (回炉再造) — Self-looping code review + beautification with project context injection. 4 parallel agents (reuse/quality/efficiency/security) + beautifier, auto-loops until 3 consecutive CLEANs. Injects project rules, lessons learned, anti-patterns, and documentation.",
+  "author": {
+    "name": "WujiTang",
+    "url": "https://github.com/earnabitmore365"
+  }
+}
