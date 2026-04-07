@@ -1,15 +1,28 @@
 ---
-description: 回炉再造 — 4 agent 审查 + 美容，注入项目规则和踩坑记录，自循环直到连续 3 次 CLEAN
+description: 回炉再造 — verify pre → 4 agent 审查 → 美容 → verify post，注入项目规则和踩坑记录，自循环直到连续 3 次 CLEAN
 ---
 
 # /reforge — 回炉再造
+
+## Phase 0：开工前检查（verify --pre）
+
+1. 检测 cwd：home 目录用 `verify.py`，auto-trading 用 `wuji-verify.py`
+2. 运行：
+   ```
+   # 太极域
+   python3 ~/.claude/merit/verify.py --pre <files...>
+   # 两仪域
+   python3 ~/.claude/merit/wuji-verify.py --pre <files...>
+   ```
+3. 输出踩坑提醒 + 当前反模式状态 + 文件文档绑定
+4. 如果有 ❌ 级违规，先修再进入 Phase 1
 
 ## Phase 1：审查修复（自动循环）
 
 ### 准备
 
 1. 确定审查范围：本次会话修改过的文件，或用户指定的文件
-2. 用 Bash 运行上下文注入引擎，获取项目规则+踩坑记录：
+2. 用 Bash 运行上下文注入引擎：
    ```
    python3 ~/.claude/merit/reforge_context.py <file1> <file2> ...
    ```
@@ -65,13 +78,27 @@ description: 回炉再造 — 4 agent 审查 + 美容，注入项目规则和踩
 - **连续 3 次 CLEAN → 完成**
 - **最多 10 轮**
 
+## Phase 3：交活前检查（verify --post）
+
+1. 运行：
+   ```
+   # 太极域
+   python3 ~/.claude/merit/verify.py --post <files...>
+   # 两仪域
+   python3 ~/.claude/merit/wuji-verify.py --post <files...>
+   ```
+2. 对比 --pre 时的违规数，不能比开工前多
+3. 如果有新增违规 → 修复 → 重跑 --post
+
 ## 完成
 
 输出摘要：
 ```
 🔥 回炉再造完成
+   Phase 0 verify pre：✅ 通过
    Phase 1 审查：X 轮（修复 N 项）
    Phase 2 美容：Y 轮（修复 M 项）
+   Phase 3 verify post：✅ 无新增违规
    总计：X+Y 轮，全部 CLEAN
 ```
 
