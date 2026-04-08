@@ -7,7 +7,7 @@ import os
 import glob
 import random
 
-DOCS_DIR = "/Volumes/SSD-2TB/文档/"
+DOCS_DIR = os.path.join("/Volumes/SSD-2TB", "文档")  # 外挂SSD，无法用expanduser
 MERIT_DIR = os.path.expanduser("~/.claude/merit")
 
 # 文件名关键词 → 注入哪些文档（顾问确认版）
