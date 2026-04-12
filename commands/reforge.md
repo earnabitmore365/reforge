@@ -12,7 +12,7 @@ description: 回炉再造 — verify pre → 4 agent 审查 → 美容 → verif
    # 太极域
    python3 ~/.claude/merit/verify.py --pre <files...>
    # 两仪域
-   python3 ~/.claude/merit/wuji-verify.py --pre <files...>
+   python3 /Volumes/SSD-2TB/project/wuji-auto-trading/wuji-verify.py --pre <files...>
    ```
 3. 输出踩坑提醒 + 当前反模式状态 + 文件文档绑定
 4. 如果有 ❌ 级违规，先修再进入 Phase 1
