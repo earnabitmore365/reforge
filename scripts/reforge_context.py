@@ -77,7 +77,18 @@ def get_recent_lessons(limit=20):
 
 def get_anti_patterns():
     """从 wuji-verify.py 提取 ANTI_PATTERNS 列表"""
-    vpath = os.path.join(MERIT_DIR, "wuji-verify.py")
+    # wuji-verify.py 已搬到项目级（2026-04-12 执事大扫除）
+    WUJI_VERIFY_PATH = os.path.join(
+        os.path.expanduser("~"), "project", "wuji-auto-trading", "wuji-verify.py"
+    )
+    if not os.path.exists(WUJI_VERIFY_PATH):
+        # fallback: 外置 SSD
+        for vol in ("/Volumes/SSD-2TB", "/Volumes/SSD-1TB"):
+            alt = os.path.join(vol, "project", "wuji-auto-trading", "wuji-verify.py")
+            if os.path.exists(alt):
+                WUJI_VERIFY_PATH = alt
+                break
+    vpath = WUJI_VERIFY_PATH
     if not os.path.exists(vpath):
         return []
     patterns = []
