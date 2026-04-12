@@ -21,7 +21,11 @@ description: 回炉再造 — verify pre → 4 agent 审查 → 美容 → verif
 
 ### 准备
 
-1. 确定审查范围：本次会话修改过的文件，或用户指定的文件
+1. 确定审查范围：
+   - 如果太极指定了模块路径（如 src/core/）→ 扫该目录下所有 .py
+   - 如果用户指定了文件列表 → 用指定的
+   - 如果都没指定 → 扫整个项目所有 .py
+   - **禁止自行缩小范围**。太极给了模块就全扫，不能挑几个文件宣布 CLEAN
 2. 用 Bash 运行上下文注入引擎：
    ```
    python3 ~/.claude/merit/reforge_context.py <file1> <file2> ...
